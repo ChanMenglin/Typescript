@@ -7,6 +7,9 @@ const baseConfig = require("./webpack.base.config")
 const devConfig = require("./webpack.dev.config")
 const proConfig = require("./webpack.pro.config")
 
-let config = process.NODE_DNV === "development" ? devConfig : proConfig
+// let config = process.env.NODE_DNV === "development" ? devConfig : proConfig
 
-module.exports = merge(baseConfig, config)
+module.exports = (env, argv) => {
+    let config = argv.node === "development" ? devConfig : proConfig
+    return merge(baseConfig, config)
+}
